@@ -10,6 +10,8 @@
 
     <div class="container">
 
+    @include('components._messages')
+
         @yield('content')
 
 
