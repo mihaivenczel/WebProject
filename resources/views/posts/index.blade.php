@@ -42,9 +42,13 @@
                             </td>
                         </tr>
                     @endforeach
+
                 </tbody>
             </table>
+
         </div>
     </div>
-
+            <div class="text-center">
+                {!! $posts->links(); !!}
+            </div>
 @endsection
