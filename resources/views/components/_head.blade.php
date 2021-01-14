@@ -10,4 +10,3 @@
 
     <title>WebProject @yield('title')</title>
 
-@yield('stylesheets')

@@ -13,15 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
  */
 Route::group(['middleware' => ['web']], function () {
-    //Auth routes
-    Route::get('auth/login', 'Auth\AuthController@showLoginForm');
-    Route::post('auth/login', 'Auth\AuthController@postLogin');
-    Route::get('auth/logout', 'Auth\AuthController@postLogout');
-
-    //Register routes
-    Route::get('auth/logout','Auth\RegisterController@showRegistrationForm');
-    Route::post('auth/logout','Auth\AuthController@postRegister');
-
+    Auth::routes();
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     //Everything else
     Route::get('webproject/{slug}', ['as' => 'blog.single', 'uses' => 'App\Http\Controllers\BlogController@getSingle'])->where('slug', '[w\d\-\_]+');

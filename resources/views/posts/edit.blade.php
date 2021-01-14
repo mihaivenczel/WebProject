@@ -29,7 +29,6 @@
                     <dt>Last updated: </dt>
                     <dd>{{ date('j M, Y h:ia', strtotime($post->updated_at)) }}</dd>
                 </dl>
-
                 <hr>
                 <div class="row">
                     <div class="col-sm-6">
@@ -38,7 +37,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-md-12">
 
                         {!! Html::linkRoute('posts.show', 'Cancel', [$post->id], ['class' => 'btn btn-danger btn-block'])
                         !!}
