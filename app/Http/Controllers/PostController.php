@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index()
     {
         // create and store posts in a var
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'desc')->paginate(5);
 
         //return a view and pass it into the var
         return view('posts.index')->withPosts($posts);
@@ -43,6 +43,7 @@ class PostController extends Controller
         //validate the data
         $this->validate($request, array(
             'title' => 'required|max:255',
+            'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
             'body' => 'required',
         ));
 
@@ -50,6 +51,7 @@ class PostController extends Controller
         $post = new Post;
 
         $post->title = $request->title;
+        $post->slug = $request->slug;
         $post->body = $request->body;
 
         $post->save();
@@ -69,7 +71,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('posts.show')->with('post', $post);
+        return view('posts.show')->withPost($post);
     }
 
     /**
@@ -96,15 +98,26 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //validate data
-        $this->validate($request, array(
-            'title' => 'required|max:255',
-            'body' => 'required',
-        ));
 
+        $post = Post::find($id);
+        if ($request->input('slug') == $post->slug) {
+            $this->validate($request, array(
+                'title' => 'required|max:255',
+
+                'body' => 'required',
+            ));
+        } else {
+            $this->validate($request, array(
+                'title' => 'required|max:255',
+                'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+                'body' => 'required',
+            ));
+        }
         //save data into db
         $post = Post::find($id);
 
         $post->title = $request->input('title');
+        $post->slug = $request->input('slug');
         $post->body = $request->input('body');
 
         $post->save();

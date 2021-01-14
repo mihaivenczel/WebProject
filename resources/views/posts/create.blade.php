@@ -4,22 +4,25 @@
 
 @section('content')
 
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
-    <h1>Create New Post</h1>
-    <hr>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h1>Create New Post</h1>
+            <hr>
 
-    {!! Form::open(array('route' => 'posts.store' )) !!}
-    {{ Form::label('title', 'Title: ') }}
-     {{ Form::text('title',null, array('class' => 'form-control')) }}
+            {!! Form::open(['route' => 'posts.store']) !!}
+            {{ Form::label('title', 'Title: ') }}
+            {{ Form::text('title', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
 
-     {{ Form::label('body', 'Post body: ') }}
-     {{ Form::textarea('body',null, array('class' => 'form-control')) }}
+            {{ Form::label('slug', 'Slug:') }}
+            {{ Form::text('slug', null, ['class' => 'form-control', 'required' => '', 'minlength' => '5', 'maxlength' => '255']) }}
 
-     {{ Form::submit('Create Post',array('class' => 'btn btn-success btn-lg','style'=>'margin-top:20px;')) }}
-    {!! Form::close() !!}
+            {{ Form::label('body', 'Post body: ') }}
+            {{ Form::textarea('body', null, ['class' => 'form-control', 'required' => '']) }}
 
+            {{ Form::submit('Create Post', ['class' => 'btn btn-success btn-lg', 'style' => 'margin-top:20px;']) }}
+            {!! Form::close() !!}
+
+        </div>
     </div>
-</div>
 
 @endsection
