@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::group(['middleware'=> ['web']], function(){
 Route::get('/', 'App\Http\Controllers\PageController@getIndex');
 Route::get('about', 'App\Http\Controllers\PageController@getAbout');
+Route::resource('/posts', 'App\Http\Controllers\PostController');
+});
