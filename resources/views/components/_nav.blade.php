@@ -12,6 +12,9 @@
             <li class="nav-item active">
                 <a class="{{ Request::is('/') ? 'btn active' : 'nav-link' }}" href="/">Home </a>
             </li>
+            <li class="nav-item active">
+                <a class="{{ Request::is('blog') ? 'btn active' : 'nav-link' }}" href="/blog">Blog </a>
+            </li>
             <li class="nav-item">
                 <a class="{{ Request::is('about') ? 'btn active' : 'nav-link' }}" href="/about">Profile</a>
             </li>
